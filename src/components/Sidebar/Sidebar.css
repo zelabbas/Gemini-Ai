@@ -5,7 +5,9 @@
     justify-content: space-between;
     background-color: #f0f4f9;
     padding: 25px 15px;
+    /* transition: width 0.3s ease;  */
 }
+
 
 .sidebar img {
     width: 20px;
@@ -34,6 +36,17 @@
 .sidebar .recent {
     display: flex;
     flex-direction: column;
+    /* background-color: rebeccapurple; */
+}
+
+
+.sidebar .scroll-items {
+    overflow: scroll;
+    max-height: 300px;
+    /* background-color: rebeccapurple; */
+}
+.sidebar .recent .scroll-items::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar .recent-title {
