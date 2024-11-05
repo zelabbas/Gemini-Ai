@@ -6,21 +6,24 @@ export const Context = createContext();
 const ContextProvider  = (props) => {
 
     const [input, setInput] = useState("");
-    const [recentPormpt, setRecentPormpt] = useState("");
-    const [prevPormpt, setPrevPrompts] = useState([]);
+    const [recentPrompt, setRecentPrompt] = useState("");
+    const [prevPrompts, setPrevPrompts] = useState([]);
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState("");
 
     const delayPara = (index, nextWord) => {
-
+        setTimeout(function(){
+            setResultData(prev => prev + nextWord);
+        }, 75 * index);
     }
 
     const onSent = async (prompt) => {
         setResultData("")
         setLoading(true)
         setShowResult(true)
-        setRecentPormpt(input)
+        setRecentPrompt(input)
+        setPrevPrompts(prev => [...prev, input]);
       const response =  await run(input)
       let responseArray = response.split("**");
       let newResponse = '';
@@ -33,17 +36,21 @@ const ContextProvider  = (props) => {
         }
       }
       newResponse = newResponse.split('*').join('</br>');
-      setResultData(newResponse)
+    //   setResultData(newResponse)
+    let newResponseArray = newResponse.split(' ');
+    for(let i = 0; i < newResponseArray.length; i++) {
+        delayPara(i, newResponseArray[i] + " ");
+    }
       setLoading(false)
       setInput("")
     }
 
     const contextValue = {
-        prevPormpt,
+        prevPrompts,
         setPrevPrompts,
         onSent,
-        setRecentPormpt,
-        recentPormpt,
+        setRecentPrompt,
+        recentPrompt,
         showResult,
         loading,
         resultData,

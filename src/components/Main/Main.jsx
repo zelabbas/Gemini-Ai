@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import './Main.css'
 import { assets } from '../../assets/assets'
-import { Context } from '../../context/context'
+import { Context } from '../../context/Context'
 
 const Main = () => {
 
-    const {onSent, recentPormpt, showResult, loading, resultData, setInput, input} = useContext(Context)
+    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useContext(Context)
   return (
     <div className='main'>
         <div className='nav'>
@@ -42,7 +42,7 @@ const Main = () => {
             <div className='result'>
                 <div className="result-title">
                     <img src={assets.user_icon} alt="" />
-                    <p>{recentPormpt}</p>
+                    <p>{recentPrompt}</p>
                 </div>
                 <div className='result-data'>
                     <img src={assets.gemini_icon} alt="" />
