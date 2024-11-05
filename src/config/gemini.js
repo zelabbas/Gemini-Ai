@@ -1,16 +1,10 @@
-// const apikey = "";
-// import dotenv from "dotenv";
-// require("dotenv").config();
-
-// dotenv.config(); 
 import {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai";
   
-  // const apiKey = process.env.GEMINI_API_KEY;
-  const apiKey = "AIzaSyBro5O6I9GqfyClgwVePgXD92Sb3j-qOXg";
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
   
   const model = genAI.getGenerativeModel({
@@ -32,9 +26,14 @@ import {
       ],
     });
   
-    const result = await chatSession.sendMessage(prompte);
-    console.log(result.response.text());
-    return (result.response.text());
+    try {
+      const result = await chatSession.sendMessage(prompte);
+      console.log(result.response.text());
+      return (result.response.text());
+    }catch {
+      console.error("Error generating response:", error);
+      return "An error occurred while generating the response.";
+    }
   }
   
 export default  run;
